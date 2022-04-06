@@ -4,7 +4,7 @@ const router = Router();
 
 router.post('/postCreations', controllers.createPost);
 router.post('/commentCreations', controllers.createComment);
-router.get('/postsList', controllers.getAllPosts);
+router.get('/', controllers.getAllPosts);
 
 
 module.exports = router;
