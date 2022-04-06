@@ -30,10 +30,17 @@ const createComment = async (req, res) => {
     }
 }
 
-// const getCommentsOfPost 
+const getAllCommentsOfPost = async (req, res) => {
+    try {
+
+    } catch (error) {
+
+    }
+}
 
 module.exports = {
     createPost,
     getAllPosts,
-    createComment
+    createComment,
+    getAllCommentsOfPost
 }
