@@ -1,15 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import './styles/App.css'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <PostList />
-      <Routes>
-        <Route path="/post/:id" element={<Products />} />
-      </Routes>
+      <h3>TRAVEL BLOGGER</h3>
+      {/* <div className="flex-row">
+        <div className="left">
+          <Departments />
+        </div>
+        <div className="right">
+          <Routes>
+            <Route path="/departments/:id" element={<Products />} />
+          </Routes>
+        </div>
+      </div> */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,11 +1,11 @@
-const { model } = require('mongoose')
-const PostSchema = require('./post')
-const CommentSchema = require('./comment')
+const mongoose = require('mongoose')
+const CommentsSchema = require('./Comments')
+const PostsSchema = require('./Posts')
 
-const Post = model('Post', PostSchema)
-const Comment = model('Comment', CommentSchema)
+const Comments = mongoose.model('Comments', CommentsSchema)
+const Posts = mongoose.model('Posts', PostsSchema)
 
 module.exports = {
-  Post,
-  Comment
+  Comments,
+  Posts
 }

@@ -1,46 +1,57 @@
-const db = require('../db')
-const { Post, Comment } = require('../models/index')
+const { Posts } = require('../models')
+const { Comments } = require('../models')
 
-const createPost = async (req, res) => {
-    try {
-        const post = await new Post(req.body);
-        await post.save()
-        return res.status(201).json({ post });
-    } catch (error) {
-        return res.status(500).json({ error: error.message })
-    }
+const getPostDetails = async (req, res) => {
+  try {
+    const posts = await Posts.find()
+    return res.status(200).json({ posts })
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
 }
 
-const getAllPosts = async (req, res) => {
-    try {
-        const posts = await Post.find()
-        return res.status(200).json({ posts })
-    } catch (error) {
-        return res.status(500).send(error.message);
-    }
+const createPostDetails = async (req, res) => {
+  try {
+    const posts = await new Posts(req.body)
+    await posts.save()
+    return 'test'
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
 }
 
-const createComment = async (req, res) => {
-    try {
-        const comment = await new Comment(req.body);
-        await comment.save()
-        return res.status(201).json({ workout });
-    } catch (error) {
-        return res.status(500).json({ error: error.message })
-    }
+const getComments = async (req, res) => {
+  try {
+    let comments = await Comments.find()
+    return res.status(200).json(comments)
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
 }
 
-const getAllCommentsOfPost = async (req, res) => {
-    try {
+const getCommentsByPost = async (req, res) => {
+  try {
+    let comments = await Comments.find({ Posts: req.params.id }).exec()
+    return res.status(201).json(comments)
+  } catch (error) {
+    return res.status(500).send(error.message)
+  }
+}
 
-    } catch (error) {
-
-    }
+const createCommentPost = async (req, res) => {
+  try {
+    const comment = await new Comments(req.body)
+    await comment.save()
+    return res.status(200).json(comment)
+  } catch (error) {
+    return res.status(500).json({ error: error.message })
+  }
 }
 
 module.exports = {
-    createPost,
-    getAllPosts,
-    createComment,
-    getAllCommentsOfPost
+  getPostDetails,
+  createPostDetails,
+  getComments,
+  createCommentPost,
+  getCommentsByPost
 }

@@ -1,16 +1,24 @@
-const express = require('express');
-const routes = require('./routes');
-const db = require('./db');
-const bodyParser = require('body-parser');
+const express = require('express')
 const cors = require('cors')
+const postController = require('./controller/PostController')
+const db = require('./db')
+const logger = require('morgan')
 
-const PORT = process.env.PORT || 3001;
+const app = express()
 
-const app = express();
-app.use(bodyParser.json());
+const PORT = process.env.PORT || 3001
+
+app.use(express.json())
 app.use(cors())
+app.use(logger('dev'))
+app.use(express.urlencoded({ extended: false }))
 
-app.use('/', routes);
+//routes
+app.get('/', postController.getPostDetails)
+app.post('/post', postController.createPostDetails)
+app.post('/comments/new', postController.createCommentPost)
+app.get('/comments', postController.getComments)
+app.get('/posts/:id/comments', postController.getCommentsByPost)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 

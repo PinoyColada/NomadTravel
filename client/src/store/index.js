@@ -1,15 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import thunk from 'redux-thunk'
-import postsReducer from './reducers/PostsReducer'
-import postCommentsReducer from './reducers/PostCommentsReducer'
+import CommentReducer from './reducers/CommentsReducer'
+import LikesReducer from './reducers/LikesReducer'
+import PostReducer from './reducers/PostReducer'
+
 
 const store = createStore(
     combineReducers({
-        postsState: postsReducer,
-        postCommentsState: postCommentsReducer
+        commentState: CommentReducer,
+        likesState: LikesReducer,
+        postState: PostReducer
     }),
-    composeWithDevTools(applyMiddleware(thunk))
+    composeWithDevTools()
 )
 
 export default store
